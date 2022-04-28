@@ -2,6 +2,7 @@
 
 namespace App;
 use Controller\vuJours;
+use Controller\vuSemaines;
 use Librairy\ConvertDate;
 use Model\ChargerView;
 use Model\TypeEvenement;
@@ -28,7 +29,7 @@ class Route extends ChargerView
             $data['year']= $year;
             $data['dateRdv']= $vujour->index();
             $data['TypeEve']= (new TypeEvenement)->getEvenement();
-            $data['jourLettre']= (new ConvertDate)->getJourLettre($day,$month,$year);
+            $data['jourLettre']= (new ConvertDate)->getJourLettre(strftime("%u", strtotime(date($year . '-' . $month . '-' . $day))));
             $data['tabMois']= (new ConvertDate)->getMoisLettre($month);
             $this->view('header',$data);
             $this->view('jour',$data);
@@ -36,11 +37,17 @@ class Route extends ChargerView
 
             break;
             case'vusemaine';
-            var_dump($url);
+            $vusemaine = new vuSemaines();
+                $data['dateRdv']= $vusemaine->index();
+
                 $week = (!empty($url[2])?$url[2]:date('W',strtotime(date('Y-m-d'))));
                 $year = (!empty($url[3])?$url[3]:date('Y',strtotime(date('Y-m-d'))));
+                $data['dateLundi'] = (new ConvertDate)->getLundi($week,$year);
+                $data['dateVendredi'] = (new ConvertDate)->getVendredi($week,$year);
                 $data['dateLundiLettre'] = (new ConvertDate)->getLundilettre($week,$year);
                 $data['dateVendrediLettre'] = (new ConvertDate)->getVendredilettre($week,$year);
+                $data['tabjour']= (new ConvertDate)->getWeek($week,$year);
+                $data['tabjourLettre']= (new ConvertDate)->getTabjourlettre();
                 //$dateVendrediLettre = date('d', strtotime($dateVendredi)) . ' ' . $tabMois[(int)date('m', strtotime($dateVendredi))];
                 $data['TypeEve']= (new TypeEvenement)->getEvenement();
                 $data['year']= $year;
