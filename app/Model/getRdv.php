@@ -3,6 +3,7 @@
 namespace Model;
 
 
+use Librairy\ConvertDate;
 use Librairy\personnaliser;
 
 class getRdv extends personnaliser
@@ -96,7 +97,7 @@ class getRdv extends personnaliser
     public function getSemaine(): array
     {
         $idclient = 1;
-        $dateLundi = date('Y-m-d', strtotime($this->day));
+        $dateLundi = (new ConvertDate())->getLundi($this->week, $this->year);
 
         $dateVendredi = date('Y-m-d', strtotime("+6 day", strtotime($dateLundi)));
         $reqjour = $this->db->prepare('select * from evenement join typeevenement t on evenement.Id_TypeEvenement = t.Id_TypeEvenement where date(Datedebut_Evenement)>=? and date(Datefin_Evenement)<=?  and Id_Client=?');

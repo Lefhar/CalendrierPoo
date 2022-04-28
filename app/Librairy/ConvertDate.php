@@ -17,10 +17,12 @@ class ConvertDate
         return $tabjourLettre[$day];
     }
 
-
-    public function getTabjourlettre():array
+    /**
+     * @return array
+     */
+    public function getTabjourlettre(): array
     {
-        return  [0 => 'Lundi', 1 => 'Mardi', 2 => 'Mercredi', 3 => 'Jeudi', 4 => 'Vendredi', 5 => 'Samedi', 6 => 'Dimanche'];
+        return [0 => 'Lundi', 1 => 'Mardi', 2 => 'Mercredi', 3 => 'Jeudi', 4 => 'Vendredi', 5 => 'Samedi', 6 => 'Dimanche'];
     }
 
     /**
@@ -40,14 +42,19 @@ class ConvertDate
      */
     public function getLundi($week, $year): string
     {
-        $timestamp = $this->getF($year, $week);
+        $timestamp = $this->getTimetamp($year, $week);
         $jour = date('Y-m-d', $timestamp);
         return date('Y-m-d', strtotime($jour));
     }
 
+    /**
+     * @param $week
+     * @param $year
+     * @return string
+     */
     public function getLundilettre($week, $year): string
     {
-        return date('d', strtotime($this->getLundi($week, $year))) . ' ' .$this->getMoisLettre((int)date('m', strtotime($this->getLundi($week, $year))));
+        return date('d', strtotime($this->getLundi($week, $year))) . ' ' . $this->getMoisLettre((int)date('m', strtotime($this->getLundi($week, $year))));
     }
 
     public function getVendredi($week, $year)
@@ -55,28 +62,41 @@ class ConvertDate
         return date('Y-m-d', strtotime("+6 day", strtotime($this->getLundi($week, $year))));
 
     }
-    public function getVendredilettre($week, $year)
+
+    /**
+     * @param $week
+     * @param $year
+     * @return string
+     */
+    public function getVendredilettre($week, $year): string
     {
-        return date('d', strtotime($this->getVendredi($week, $year))) . ' ' .$this->getMoisLettre((int)date('m', strtotime($this->getVendredi($week, $year))));
+        return date('d', strtotime($this->getVendredi($week, $year))) . ' ' . $this->getMoisLettre((int)date('m', strtotime($this->getVendredi($week, $year))));
 
     }
-  public function getWeek($week,$year){
-      $jour = date('Y-m-d',$this->getF($year, $week));
-      $tabjour = array();
-      for ($i = 0; $i < 7; $i++) {
-          $tabjour[] = $jour;
-          $jour = date('Y-m-d', strtotime("+1 day", strtotime($jour)));
 
-      }
-     return $tabjour;
-  }
+    /**
+     * @param $week
+     * @param $year
+     * @return array
+     */
+    public function getWeek($week, $year): array
+    {
+        $jour = date('Y-m-d', $this->getTimetamp($year, $week));
+        $tabjour = array();
+        for ($i = 0; $i < 7; $i++) {
+            $tabjour[] = $jour;
+            $jour = date('Y-m-d', strtotime("+1 day", strtotime($jour)));
+
+        }
+        return $tabjour;
+    }
 
     /**
      * @param $year
      * @param $week
      * @return float|int
      */
-    public function getF($year, $week)
+    public function getTimetamp($year, $week)
     {
         $firstDayInYear = date("N", mktime(0, 0, 0, 1, 1, $year));
         if ($firstDayInYear < 5)
