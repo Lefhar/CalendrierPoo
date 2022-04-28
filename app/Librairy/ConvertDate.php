@@ -57,6 +57,11 @@ class ConvertDate
         return date('d', strtotime($this->getLundi($week, $year))) . ' ' . $this->getMoisLettre((int)date('m', strtotime($this->getLundi($week, $year))));
     }
 
+    /**
+     * @param $week
+     * @param $year
+     * @return false|string
+     */
     public function getVendredi($week, $year)
     {
         return date('Y-m-d', strtotime("+6 day", strtotime($this->getLundi($week, $year))));

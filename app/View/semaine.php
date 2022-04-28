@@ -18,10 +18,10 @@
             </div>
         </div>
         <div class="col-md-12 border text-center  p-4"><a class="btn btn-dark fw-bold"
-                                                          href="/vusemaine/1/<?= $year - 1; ?>"><</a>&nbsp;<div
+                                                          href="/vusemaine/<?= (int)date('W', strtotime("-1 year", strtotime($dateLundi))); ?>/<?= $year - 1; ?>"><</a>&nbsp;<div
                 class="btn btn-light w-25 fw-bold"><?php echo $year; ?></div>
             &nbsp;&nbsp;
-            <a class="btn btn-dark fw-bold" href="/vusemaine/1/<?php echo $year + 1; ?>">></a>
+            <a class="btn btn-dark fw-bold" href="/vusemaine/<?= (int)date('W', strtotime("+1 year", strtotime($dateLundi))); ?>/<?php echo $year + 1; ?>">></a>
         </div>
         <div class="col-md-12 border  p-4">
             <div class="text-center p-10">
