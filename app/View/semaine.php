@@ -4,7 +4,7 @@
             <div class="btn-group btn-group-toggle">
                 <label class="btn btn-dark ">
                     <a class="nav-link text-light fw-bold"
-                       href="/vujour/<?= (int)date('d', strtotime(date($dateLundi))); ?>/<?= $year; ?>/<?= (int)date('m', strtotime($dateLundi)); ?>">Jour</a>
+                       href="/vujour/<?= (int)date('d', strtotime(date($dateLundi))); ?>/<?= (int)date('m', strtotime($dateLundi)); ?>/<?= $year; ?>">Jour</a>
                 </label>
                 <label class="btn btn-info active">
                     <a class="nav-link text-light fw-bold"
