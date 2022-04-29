@@ -61,7 +61,7 @@
                         href="/jour/<?= (int)date('d', strtotime($row)); ?>/<?= (int)date('m', strtotime($row)); ?>/<?= (int)date('Y', strtotime($row)); ?>"
                         class="text-dark"><?= $tabjourLettre[$key]; ?> <?= date('d', strtotime($row)); ?></a>
                 <br>
-                <a href="/nouveau_rdv.php?m=<?= (int)date('m', strtotime($row)); ?>&y=<?= (int)date('Y', strtotime($row)); ?>&d=<?= (int)date('d', strtotime($row)); ?>">+
+                <a href="/nouveaurdv/<?= (int)date('m', strtotime($row)); ?>/<?= (int)date('Y', strtotime($row)); ?>/<?= (int)date('d', strtotime($row)); ?>">+
                     Evénement</a>
             </div>
 

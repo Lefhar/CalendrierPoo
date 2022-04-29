@@ -1,9 +1,9 @@
 <div class="container">
-    <div class="row m-2">
+    <div class="row">
         <div class="col-md-12 border text-center p-4">
             <div class="btn-group btn-group-toggle">
                 <label class="btn btn-dark ">
-                    <a class="nav-link text-light fw-bold" href="/jour/<?= $month; ?>/<?= $year; ?>">Jour</a>
+                    <a class="nav-link text-light fw-bold" href="/jour/1/<?= $month; ?>/<?= $year; ?>">Jour</a>
                 </label>
                 <label class="btn btn-dark ">
                     <a class="nav-link text-light fw-bold"

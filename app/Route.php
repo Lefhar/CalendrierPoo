@@ -23,7 +23,7 @@ class Route extends ChargerView
             case 'jour';
                 $vujour = new vuJours();
                 $year = (!empty($url[4]) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d'))));
-                $month = (!empty($url[3]) ? $url[3] : (int)date('m', strtotime(date('Y-m-d'))));
+                $month = (!empty($url[3]&&$url[3]>=1 && $url[3]<=12) ? (int)$url[3] : (int)date('m', strtotime(date('Y-m-d'))));
                 $day = (!empty($url[2]) ? $url[2] : (int)date('d', strtotime(date('Y-m-d'))));
                 $vujour->setDay($day);
                 $vujour->setMonth($month);
@@ -45,7 +45,7 @@ class Route extends ChargerView
 
                 $vusemaine = new vuSemaines();
 
-                $week = (!empty($url[2]) ? $url[2] : date('W', strtotime(date('Y-m-d'))));
+                $week = (!empty($url[2]&&$url[2]>=1 and $url[2]<=52) ? (int)$url[2] : date('W', strtotime(date('Y-m-d'))));
                 $year = (!empty($url[3]) ? $url[3] : date('Y', strtotime(date('Y-m-d'))));
                 $vusemaine->setYear($year);
                 $vusemaine->setWeek($week);
@@ -69,7 +69,7 @@ class Route extends ChargerView
 
             case 'mois';
                 $vumois = new VuMois;
-                $month = (!empty($url[2]) ? $url[2] : date('m', strtotime(date('Y-m-d'))));
+                $month = (!empty($url[2]&&$url[2]>=1 && $url[2]<=12) ? $url[2] : date('m', strtotime(date('Y-m-d'))));
                 $year = (!empty($url[3]) ? $url[3] : date('Y', strtotime(date('Y-m-d'))));
                 $data['month'] = $month;
                 $data['year'] = $year;
@@ -90,8 +90,8 @@ class Route extends ChargerView
 
             default;
                 $year = (!empty($url[4]) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d'))));
-                $month = (!empty($url[3]) ? $url[3] : (int)date('m', strtotime(date('Y-m-d'))));
-                $day = (!empty($url[2]) ? $url[2] : (int)date('d', strtotime(date('Y-m-d'))));
+                $month = (!empty($url[3]&&$url[3]>=1 && $url[3]<=12) ? $url[3] : (int)date('m', strtotime(date('Y-m-d'))));
+                $day = (!empty($url[2]) ? (int)$url[2] : (int)date('d', strtotime(date('Y-m-d'))));
                 $vujour->setDay($day);
                 $vujour->setMonth($month);
                 $vujour->setYear($year);

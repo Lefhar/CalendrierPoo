@@ -45,12 +45,12 @@
         <div class="col-md-10 border  p-4" style="height: 80px;">
             <div class="text-center p-10">
                 <a class="btn btn-dark fw-bold"
-                   href="/jour/<?= (int)date('d', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('m', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>"><</a>
+                   href="/jour/<?= (int)date('d', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('m', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('Y', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>"><</a>
 
                 <div class="btn btn-light w-25 fw-bold"> <?= $jourLettre; ?> <?= date('d', strtotime(date($year . '-' . $month . '-' . $day))); ?>
                     <?= $tabMois; ?> <?= $year; ?></div>
                <a class="btn btn-dark fw-bold"
-                               href="/jour/<?= (int)date('d', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('m', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>">></a>
+                               href="/jour/<?= (int)date('d', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('m', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('Y', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>">></a>
             </div>
         </div>
 
