@@ -1,4 +1,4 @@
-Agenda en poo avec gestion du planning par jour semaines mois
+Agenda en poo avec gestion du planning par jour,semaines,mois
 
 pour installer git clone https://github.com/Lefhar/CalendrierPoo.git
 
