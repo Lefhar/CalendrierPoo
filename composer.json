@@ -1,7 +1,7 @@
 {
     "name": "harold/agenda",
     "description": "Agenda avec événement ajoutable et modifiable",
-    "type": "project",
+    "type": "package",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -17,7 +17,9 @@
             "name": "Lefhar",
             "email": "s.lefebvre907@laposte.net"
         }
+
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=7.4.0",
       "ext-ctype": "*"
