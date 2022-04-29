@@ -21,7 +21,7 @@
 
             <div class="btn btn-light w-25 fw-bold"><?php echo $year; ?></div>
 
-            <a class="btn btn-dark fw-bold" href="/mois/1/<?= $month; ?>/<?php echo $year + 1; ?>">></a>
+            <a class="btn btn-dark fw-bold" href="/mois/<?= $month; ?>/<?php echo $year + 1; ?>">></a>
         </div>
         <div class="col-md-12 border text-center  p-4"><a class="btn btn-dark fw-bold"
                                                           href="/mois/<?= ($month - 1 == 0) ? 12 : $month - 1; ?>
