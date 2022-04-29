@@ -4,7 +4,7 @@ namespace Controller;
 
 use Model\getRdv;
 
-class vuJours extends getRdv
+class joursController extends getRdv
 {
 
 

@@ -2,7 +2,7 @@
 
 namespace Model;
 
-class TypeEvenement
+class typeEvenement
 {
 
     public $idclient;

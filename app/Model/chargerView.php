@@ -2,7 +2,7 @@
 
 namespace Model;
 
-class ChargerView
+class chargerView
 {
 
     public function view($vu='index',$data=""){

@@ -2,41 +2,42 @@
 
 namespace App;
 
-use Controller\vuJours;
-use Controller\VuMois;
-use Controller\vuNouveaurdv;
-use Controller\vuSemaines;
+use Controller\joursController;
+use Controller\listeevenementController;
+use Controller\moisController;
+use Controller\nouveaurdvController;
+use Controller\nouveautypeevenementController;
+use Controller\semainesController;
 use Librairy\ConvertDate;
-use Model\ChargerView;
-use Model\nouveauRdv;
-use Model\TypeEvenement;
+use Model\chargerView;
+use Model\typeEvenement;
 
-class Route extends ChargerView
+class Route extends chargerView
 {
     public function index()
     {
         $uris = $_SERVER['REQUEST_URI'];
         $url = explode('/', $uris);
         $data = array();
-        $vujour = new vuJours();
+        $vujour = new joursController();
 
 
         switch ($url['1']) {
             case 'jour';
-                $vujour = new vuJours();
-               // $year = (!empty($url[4] && (ctype_digit($url[4]) && strlen($url[4]) >= 4)) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d'))));
-                if(!empty($url[4])){
+                $vujour = new joursController();
+                // $year = (!empty($url[4] && (ctype_digit($url[4]) && strlen($url[4]) >= 4)) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d'))));
+                if (!empty($url[4])) {
 
-                        $year = (ctype_digit($url[4]) && strlen($url[4]) >= 4) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d')));
+                    $year = (ctype_digit($url[4]) && strlen($url[4]) >= 4) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d')));
 
-                }else{
-                    $year =   (int)date('Y', strtotime(date('Y-m-d')));
+                } else {
+                    $year = (int)date('Y', strtotime(date('Y-m-d')));
                 }
 
-                if(!empty($url[3])){
-                    $month = (!empty($url[3] && $url[3] >= 1 && $url[3] <= 12) ? (int)$url[3] : (int)date('m', strtotime(date('Y-m-d'))));
+                if (!empty($url[3])) {
+                    $month = ($url[3] >= 1 && $url[3] <= 12) ? (int)$url[3] : (int)date('m', strtotime(date('Y-m-d')));
 
-                }else{
+                } else {
                     $month = (int)date('m', strtotime(date('Y-m-d')));
 
                 }
@@ -50,22 +51,30 @@ class Route extends ChargerView
                 $data['month'] = $month;
                 $data['year'] = $year;
                 $data['dateRdv'] = $vujour->index();
-                $typeEvenement = new TypeEvenement();
+                $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
                 $data['TypeEve'] = $typeEvenement->getEvenement();
                 $data['jourLettre'] = (new ConvertDate)->getJourLettre(strftime("%u", strtotime(date($year . '-' . $month . '-' . $day))));
                 $data['tabMois'] = (new ConvertDate)->getMoisLettre($month);
                 $this->view('header', $data);
                 $this->view('jour', $data);
-                $this->view('footer', $data);
 
                 break;
             case'semaine';
 
-                $vusemaine = new vuSemaines();
+                $vusemaine = new semainesController();
 
                 $week = (!empty($url[2] && $url[2] >= 1 and $url[2] <= 52) ? (int)$url[2] : date('W', strtotime(date('Y-m-d'))));
-                $year = (!empty($url[3] && ctype_digit($url[3]) && strlen($url[3]) >= 4) ? $url[3] : date('Y', strtotime(date('Y-m-d'))));
+
+
+                if (!empty($url[3])) {
+
+                    $year = (ctype_digit($url[3]) && strlen($url[3]) >= 3) ? $url[3] : (int)date('Y', strtotime(date('Y-m-d')));
+
+                } else {
+                    $year = (int)date('Y', strtotime(date('Y-m-d')));
+                }
+
                 $vusemaine->setYear($year);
                 $vusemaine->setWeek($week);
                 $vusemaine->setIdclient(1);
@@ -77,18 +86,17 @@ class Route extends ChargerView
                 $data['dateVendrediLettre'] = (new ConvertDate)->getVendredilettre($week, $year);
                 $data['tabjour'] = (new ConvertDate)->getWeek($week, $year);
                 $data['tabjourLettre'] = (new ConvertDate)->getTabjourlettre();
-                $typeEvenement = new TypeEvenement();
+                $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
                 $data['TypeEve'] = $typeEvenement->getEvenement();
                 $data['year'] = $year;
                 $data['week'] = $week;
                 $this->view('header', $data);
                 $this->view('semaine', $data);
-                $this->view('footer', $data);
                 break;
 
             case 'mois';
-                $vumois = new VuMois;
+                $vumois = new moisController;
                 $month = (!empty($url[2] && $url[2] >= 1 && $url[2] <= 12) ? $url[2] : (int)date('m', strtotime(date('Y-m-d'))));
                 $year = (!empty($url[3]) ? $url[3] : (int)date('Y', strtotime(date('Y-m-d'))));
                 $data['month'] = $month;
@@ -97,7 +105,7 @@ class Route extends ChargerView
                 $vumois->setYear($year);
                 $vumois->setIdclient(1);
                 $data['tabsemaine'] = (new ConvertDate)->getSemaines($year, $month);
-                $typeEvenement = new TypeEvenement();
+                $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
                 $data['TypeEve'] = $typeEvenement->getEvenement();
 
@@ -107,23 +115,22 @@ class Route extends ChargerView
                 $data['dateRdv'] = $vumois->index();
                 $this->view('header', $data);
                 $this->view('mois', $data);
-                $this->view('footer', $data);
 
                 break;
 
             case 'nouveaurdv';
-                if(!empty($url[2])){
-                    $month = (!empty($url[2] && $url[2] >= 1 && $url[2] <= 12) ? (int)$url[2] : (int)date('m', strtotime(date('Y-m-d'))));
+                if (!empty($url[2])) {
+                    $month = ($url[2] >= 1 && $url[2] <= 12) ? (int)$url[2] : (int)date('m', strtotime(date('Y-m-d')));
 
-                }else{
+                } else {
                     $month = (int)date('m', strtotime(date('Y-m-d')));
 
                 }
                 $year = (!empty($url[3]) ? $url[3] : (int)date('Y', strtotime(date('Y-m-d'))));
                 $day = (!empty($url[4]) ? $url[4] : (int)date('d', strtotime(date('Y-m-d'))));
-                $hour = (!empty($url[5]) ? $url[5] : (int)date('H', strtotime(date('Y-m-d'))));
+                $hour = (!empty($url[5]) ? $url[5] : date('H', strtotime(date('Y-m-d H:i:s'))));
 
-                $nouveaurdv = new vuNouveaurdv();
+                $nouveaurdv = new nouveaurdvController();
                 if ($_POST) {
                     $nouveaurdv->setPost($_POST);
                 }
@@ -132,31 +139,73 @@ class Route extends ChargerView
                 $nouveaurdv->setMonth($month);
                 $nouveaurdv->setHour($hour);
                 $nouveaurdv->setIdclient(1);
-                $typeEvenement = new TypeEvenement();
+                $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
                 $data['TypeEve'] = $typeEvenement->getEvenement();
 
                 $data['dateActuel'] = $nouveaurdv->getFormrdv();
 
-               // var_dump($nouveaurdv->getPost());
-                //var_dump($_POST);
                 $this->view('header', $data);
                 $this->view('nouveaurdv', $data);
-                $this->view('footer', $data);
+                break;
+
+
+            case 'nouveautypeevenement';
+                $nouveauTeve = new nouveautypeevenementController();
+                $nouveauTeve->setIdclient(1);
+
+                if ($_POST) {
+                    $nouveauTeve->setPost($_POST);
+                    $nouveauTeve->getFormtypeeve();
+                }
+
+                $this->view('header', $data);
+                $this->view('nouveautypeevenement', $data);
+                break;
+
+
+            case 'voirevenement';
+                if (!empty($url[2])) {
+
+                    $year = (ctype_digit($url[2]) && strlen($url[2]) >= 4) ? $url[2] : (int)date('Y', strtotime(date('Y-m-d')));
+
+                } else {
+                    $year = (int)date('Y', strtotime(date('Y-m-d')));
+                }
+                if (!empty($url[3])) {
+                    $month = ($url[3] >= 1 && $url[3] <= 12) ? (int)$url[3] : (int)date('m', strtotime(date('Y-m-d')));
+
+                } else {
+                    $month = (int)date('m', strtotime(date('Y-m-d')));
+
+                }
+                $day = (!empty($url[4]) ? $url[4] : (int)date('d', strtotime(date('Y-m-d'))));
+
+                $listeEvenement = new listeevenementController();
+                $listeEvenement->setIdclient(1);
+                $listeEvenement->setYear($year);
+                $listeEvenement->setMonth($month);
+                $listeEvenement->setDay($day);
+                $typeEvenement = new typeEvenement();
+                $typeEvenement->setIdclient(1);
+                $data['TypeEve'] = $typeEvenement->getEvenement();
+                $data['dateRdv'] = $listeEvenement->index();
+                $this->view('header', $data);
+                $this->view('listeevenement', $data);
                 break;
             default;
-                if(!empty($url[4])){
+                if (!empty($url[4])) {
 
                     $year = (ctype_digit($url[4]) && strlen($url[4]) >= 4) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d')));
 
-                }else{
-                    $year =   (int)date('Y', strtotime(date('Y-m-d')));
+                } else {
+                    $year = (int)date('Y', strtotime(date('Y-m-d')));
                 }
 
-                if(!empty($url[3])){
-                    $month = (!empty($url[3] && $url[3] >= 1 && $url[3] <= 12) ? (int)$url[3] : (int)date('m', strtotime(date('Y-m-d'))));
+                if (!empty($url[3])) {
+                    $month = ($url[3] >= 1 && $url[3] <= 12) ? (int)$url[3] : (int)date('m', strtotime(date('Y-m-d')));
 
-                }else{
+                } else {
                     $month = (int)date('m', strtotime(date('Y-m-d')));
 
                 }
@@ -170,15 +219,15 @@ class Route extends ChargerView
                 $data['month'] = $month;
                 $data['year'] = $year;
                 $data['dateRdv'] = $vujour->index();
-                $data['TypeEve'] = (new TypeEvenement)->getEvenement();
+                $data['TypeEve'] = (new typeEvenement)->getEvenement();
                 $data['jourLettre'] = (new ConvertDate)->getJourLettre(strftime("%u", strtotime(date($year . '-' . $month . '-' . $day))));
                 $data['tabMois'] = (new ConvertDate)->getMoisLettre($month);
 
                 $this->view('header', $data);
                 $this->view('jour', $data);
-                $this->view('footer', $data);
                 break;
 
         }
+        $this->view('footer', $data);
     }
 }

@@ -4,13 +4,11 @@ namespace Controller;
 
 use Model\getRdv;
 
-class vuSemaines extends getRdv
+class moisController  extends getRdv
 {
-
 
     public function index(): array
     {
-        return $this->getSemaine();
+        return $this->getMois();
     }
-
 }

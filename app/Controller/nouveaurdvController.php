@@ -4,7 +4,7 @@ namespace Controller;
 
 use Model\nouveauRdv;
 
-class vuNouveaurdv extends  nouveauRdv
+class nouveaurdvController extends  nouveauRdv
 {
 
     public function index()
