@@ -1,7 +1,7 @@
 {
     "name": "harold/agenda",
     "description": "Agenda avec événement ajoutable et modifiable",
-    "type": "package",
+    "type": "project",
     "license": "MIT",
     "minimum-stability": "dev",
     "autoload": {
