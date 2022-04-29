@@ -25,7 +25,6 @@ class Route extends chargerView
         switch ($url['1']) {
             case 'jour';
                 $vujour = new joursController();
-                // $year = (!empty($url[4] && (ctype_digit($url[4]) && strlen($url[4]) >= 4)) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d'))));
                 if (!empty($url[4])) {
 
                     $year = (ctype_digit($url[4]) && strlen($url[4]) >= 4) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d')));
@@ -56,6 +55,7 @@ class Route extends chargerView
                 $data['TypeEve'] = $typeEvenement->getEvenement();
                 $data['jourLettre'] = (new ConvertDate)->getJourLettre(strftime("%u", strtotime(date($year . '-' . $month . '-' . $day))));
                 $data['tabMois'] = (new ConvertDate)->getMoisLettre($month);
+                $data['title']= 'Calendrier du jour';
                 $this->view('header', $data);
                 $this->view('jour', $data);
 
@@ -78,7 +78,7 @@ class Route extends chargerView
                 $vusemaine->setYear($year);
                 $vusemaine->setWeek($week);
                 $vusemaine->setIdclient(1);
-
+                $data['title']= 'Calendrier de la semaine';
                 $data['dateRdv'] = $vusemaine->index();
                 $data['dateLundi'] = (new ConvertDate)->getLundi($week, $year);
                 $data['dateVendredi'] = (new ConvertDate)->getVendredi($week, $year);
@@ -99,12 +99,12 @@ class Route extends chargerView
                 $vumois = new moisController;
                 $month = (!empty($url[2] && $url[2] >= 1 && $url[2] <= 12) ? $url[2] : (int)date('m', strtotime(date('Y-m-d'))));
                 if (!empty($url[3])) {
-
                     $year = (ctype_digit($url[3]) && strlen($url[3]) >= 3) ? $url[3] : (int)date('Y', strtotime(date('Y-m-d')));
-
                 } else {
                     $year = (int)date('Y', strtotime(date('Y-m-d')));
                 }
+
+                $data['title']= 'Calendrier du mois';
                 $data['month'] = $month;
                 $data['year'] = $year;
                 $vumois->setMonth($month);
@@ -148,6 +148,7 @@ class Route extends chargerView
                 $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
                 $data['TypeEve'] = $typeEvenement->getEvenement();
+                $data['title']= 'Nouveau Rendez-vous';
 
                 $data['dateActuel'] = $nouveaurdv->getFormrdv();
 
@@ -164,6 +165,7 @@ class Route extends chargerView
                     $nouveauTeve->setPost($_POST);
                     $nouveauTeve->getFormtypeeve();
                 }
+                $data['title']= 'Nouveau type d\'événement';
 
                 $this->view('header', $data);
                 $this->view('nouveautypeevenement', $data);
@@ -186,7 +188,7 @@ class Route extends chargerView
 
                 }
                 $day = (!empty($url[4]) ? $url[4] : (int)date('d', strtotime(date('Y-m-d'))));
-
+                $data['title']= 'Evénement du jour';
                 $listeEvenement = new listeevenementController();
                 $listeEvenement->setIdclient(1);
                 $listeEvenement->setYear($year);
@@ -220,7 +222,7 @@ class Route extends chargerView
                 $vujour->setMonth($month);
                 $vujour->setYear($year);
                 $vujour->setIdclient(1);
-
+                $data['title']= 'Calendrier du jour';
                 $data['day'] = $day;
                 $data['month'] = $month;
                 $data['year'] = $year;
