@@ -6,13 +6,12 @@ use Librairy\personnaliser;
 
 class nouveauRdv extends personnaliser
 {
-    public $post = array();
+    public $post;
     public $year;
     public $month;
     public $day;
     public $hour;
     public $idclient;
-
     private $db; // déclaration de la variable de connexion
 
     public function __construct()
@@ -45,10 +44,7 @@ class nouveauRdv extends personnaliser
         $this->day = $day;
     }
 
-    public function setWeek($week)
-    {
-        $this->week = $week;
-    }
+
 
     public function setHour($hour)
     {
@@ -79,13 +75,9 @@ class nouveauRdv extends personnaliser
 
     }
 
-    public function getWeek():int
-    {
-        return $this->week;
 
-    }
 
-    public function getPost(): array
+    public function getPost()
     {
         return $this->post;
 
@@ -100,13 +92,12 @@ class nouveauRdv extends personnaliser
 
     public function getFormrdv()
     {
-        $post = $this->getPost();
-
-
 
 
         $dateActuel = date('Y-m-d\TH:i', strtotime($this->getYear() . '-' . $this->getMonth() . '-' . $this->getDay() . ' ' . $this->getHour() . ':00'));
-        if(!empty($post)) {
+        if(!empty($this->getPost())) {
+
+            $post = $this->getPost();
             $objet= $post['objet'];
             $contenu= $post['contenu'];
             $url= $post['url'];
@@ -117,6 +108,7 @@ class nouveauRdv extends personnaliser
             if($rdv->execute(array($objet, $contenu, $url, $debut, $fin, $type))){
                 $this->redirect('/jour');
             }
+
         }else{
             return $dateActuel;
         }
