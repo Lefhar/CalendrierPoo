@@ -3,11 +3,11 @@
         <div class="col-md-12 border text-center p-4">
             <div class="btn-group btn-group-toggle">
                 <label class="btn btn-dark ">
-                    <a class="nav-link text-light fw-bold" href="vujour.php?d=1&m=<?= $month; ?>&y=<?= $year; ?>">Jour</a>
+                    <a class="nav-link text-light fw-bold" href="/jour/<?= $month; ?>/<?= $year; ?>">Jour</a>
                 </label>
                 <label class="btn btn-dark ">
                     <a class="nav-link text-light fw-bold"
-                       href="vusemaine.php?w=<?= date('W', strtotime($year . '-' . $month . '-01')); ?>&y=<?= $year; ?>">Semaine</a>
+                       href="/semaine/<?= date('W', strtotime($year . '-' . $month . '-01')); ?>/<?= $year; ?>">Semaine</a>
                 </label>
                 <label class="btn btn-info active">
                     <a class="nav-link text-light fw-bold"
@@ -17,18 +17,18 @@
             </div>
         </div>
         <div class="col-md-12 border text-center  p-4"><a class="btn btn-dark fw-bold"
-                                                          href="vumois.php?mois=<?= (int)$month; ?>&annee=<?= (int)$year - 1; ?>"><</a>&nbsp;&nbsp;<div
-                class="btn btn-light w-25 fw-bold"><?php echo $year; ?></div>
-            &nbsp;&nbsp;
-            <a class="btn btn-dark fw-bold"
-               href="vumois.php?d=1&mois=<?= $month; ?>&annee=<?php echo $year + 1; ?>">></a>
+                                                          href="/mois/<?= (int)$month; ?>/<?= (int)$year - 1; ?>"><</a>
+
+            <div class="btn btn-light w-25 fw-bold"><?php echo $year; ?></div>
+
+            <a class="btn btn-dark fw-bold" href="/mois/1/<?= $month; ?>/<?php echo $year + 1; ?>">></a>
         </div>
         <div class="col-md-12 border text-center  p-4"><a class="btn btn-dark fw-bold"
-                                                          href="vumois.php?mois=<?= ($month - 1 == 0) ? 12 : $month - 1; ?>
-&annee=<?= ($month - 1 == 0) ? $year - 1 : $year; ?>"><</a>
-            <div class="btn btn-light w-25 fw-bold">&nbsp;&nbsp;<?php echo $tabMois[$month]; ?></div>
-            &nbsp;&nbsp;<a class="btn btn-dark fw-bold"
-                           href="vumois.php?mois=<?= ($month + 1 >= 12) ? 1 : $month + 1; ?>&amp;annee=<?= ($month + 1 >= 12) ? $year + 1 : $year; ?>">></a>
+                                                          href="/mois/<?= ($month - 1 == 0) ? 12 : $month - 1; ?>
+/<?= ($month - 1 == 0) ? $year - 1 : $year; ?>"><</a>
+            <div class="btn btn-light w-25 fw-bold"><?=$tabMois[$month]; ?></div>
+            <a class="btn btn-dark fw-bold"
+                           href="/mois/<?= ($month + 1 >= 12) ? 1 : $month + 1; ?>/<?= ($month + 1 >= 12) ? $year + 1 : $year; ?>">></a>
 
         </div>
         <div class="col-md-12 border text-center  p-4">
@@ -70,10 +70,10 @@
                     <div class="col-md-1 fw-bold border <?= ($rowJour == date('Y-m-d')) ? 'currentDay' : ''; ?> p-1"
                          style="width: 12.8571%;height: 150px; ">
                         <div class="date">
-                            <a href="vujour.php?d=<?= (int)date('d', strtotime($rowJour)); ?>&m=<?= (int)date('m', strtotime($rowJour)); ?>&y=<?= (int)date('Y', strtotime($rowJour)); ?>"
+                            <a href="/jour/<?= (int)date('d', strtotime($rowJour)); ?>/<?= (int)date('m', strtotime($rowJour)); ?>/<?= (int)date('Y', strtotime($rowJour)); ?>"
                                class="text-dark"><small><?= (int)date('d', strtotime($rowJour)); ?> <?= (date('m', strtotime($rowJour)) != $month) ? $tabMois[(int)date('m', strtotime($rowJour))] : ''; ?>
                             </a>
-                            <a href="nouveau_rdv.php?m=<?= (int)date('m', strtotime($rowJour)); ?>&y=<?= (int)date('Y', strtotime($rowJour)); ?>&d=<?= (int)date('d', strtotime($rowJour)); ?>">+Evénement</a></small>
+                            <a href="/nouveaurdv/<?= (int)date('m', strtotime($rowJour)); ?>/<?= (int)date('Y', strtotime($rowJour)); ?>/<?= (int)date('d', strtotime($rowJour)); ?>">+Evénement</a></small>
                         </div>
                         <?php
                         $marginTop = 0;
@@ -89,7 +89,7 @@
                                         <div class="mois rdv fw-normal eve"
                                              style="background-color: #999999;z-index: 2">
                                             Trop d'événement <a target="_blank" class="Linkrdv bg-link"
-                                                                href="voirevenement.php?y=<?= (int)date('Y', strtotime($rowJour)); ?>&m=<?= (int)date('m', strtotime($rowJour)); ?>&d=<?= (int)date('d', strtotime($rowJour)); ?>">Voir
+                                                                href="/voirevenement/<?= (int)date('Y', strtotime($rowJour)); ?>/<?= (int)date('m', strtotime($rowJour)); ?>/<?= (int)date('d', strtotime($rowJour)); ?>">Voir
                                                 la journée</a>
                                         </div>
                                         <?php
@@ -102,9 +102,9 @@
                                          style="<?= $rowrdv['Couleur_TypeEvenement']; ?>;">
                                         <?= $rowrdv['Nom_TypeEvenement']; ?>
                                         à <?= date('H:i', strtotime($rowrdv['Datedebut_Evenement'])); ?> <a
-                                            target="_blank" style="<?= $rowrdv['Couleur_TypeEvenement']; ?>"
-                                            class="Linkrdv bg-link"
-                                            href="voirevenement.php?y=<?= (int)date('Y', strtotime($rowJour)); ?>&m=<?= (int)date('m', strtotime($rowJour)); ?>&d=<?= (int)date('d', strtotime($rowJour)); ?>">Voir
+                                                target="_blank" style="<?= $rowrdv['Couleur_TypeEvenement']; ?>"
+                                                class="Linkrdv bg-link"
+                                                href="/voirevenement/<?= (int)date('Y', strtotime($rowJour)); ?>/<?= (int)date('m', strtotime($rowJour)); ?>/<?= (int)date('d', strtotime($rowJour)); ?>">Voir
                                             la journée</a>
                                     </div>
 
