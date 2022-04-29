@@ -26,6 +26,13 @@ class ConvertDate
     }
 
     /**
+     * @return array
+     */
+    public function getTabMoisLettre(): array
+    {
+        return [1 => 'Janvier', 2 => "Février", 3 => "Mars", 4 => "Avril", 5 => "Mai", 6 => "Juin", 7 => "Juillet", 8 => "Août", 9 => "Septembre", 10 => "Octobre", 11 => "Novembre", 12 => "Décembre"];
+    }
+    /**
      * @param $month
      * @return string
      */
@@ -113,5 +120,29 @@ class ConvertDate
         return $timestamp;
     }
 
+    public function getSemaines($year,$month): array
+    {
 
+        $tabsemaine = array();
+        $dateJour = date('Y-m-d', strtotime($year . '-' . $month . '-01'));
+
+
+        $demare = date('Y-m-d', strtotime('last monday', strtotime($dateJour)));
+
+
+        for ($ligne = 0; $ligne < 6; $ligne++) {
+
+
+            for ($jour = 0; $jour < 7; $jour++) {
+
+
+                $tabsemaine[$ligne][(int)date('W', strtotime($demare))][] = $demare;
+                $demare = date("Y-m-d", strtotime($demare . '+ 1 days'));
+
+
+            }
+
+        }
+        return $tabsemaine;
+    }
 }

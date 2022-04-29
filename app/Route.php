@@ -17,10 +17,10 @@ class Route extends ChargerView
         $url = explode('/', $uris);
         $data = array();
         $vujour = new vuJours();
-        $vusemaine = new vuSemaines();
-        $vumois = new VuMois;
+
+
         switch ($url['1']) {
-            case 'vujour';
+            case 'jour';
                 $vujour = new vuJours();
                 $year = (!empty($url[4]) ? $url[4] : (int)date('Y', strtotime(date('Y-m-d'))));
                 $month = (!empty($url[3]) ? $url[3] : (int)date('m', strtotime(date('Y-m-d'))));
@@ -28,6 +28,7 @@ class Route extends ChargerView
                 $vujour->setDay($day);
                 $vujour->setMonth($month);
                 $vujour->setYear($year);
+                $vujour->setIdclient(1);
                 $data['day'] = $day;
                 $data['month'] = $month;
                 $data['year'] = $year;
@@ -40,13 +41,16 @@ class Route extends ChargerView
                 $this->view('footer', $data);
 
                 break;
-            case'vusemaine';
+            case'semaine';
 
+                $vusemaine = new vuSemaines();
 
                 $week = (!empty($url[2]) ? $url[2] : date('W', strtotime(date('Y-m-d'))));
                 $year = (!empty($url[3]) ? $url[3] : date('Y', strtotime(date('Y-m-d'))));
                 $vusemaine->setYear($year);
                 $vusemaine->setWeek($week);
+                $vusemaine->setIdclient(1);
+
                 $data['dateRdv'] = $vusemaine->index();
                 $data['dateLundi'] = (new ConvertDate)->getLundi($week, $year);
                 $data['dateVendredi'] = (new ConvertDate)->getVendredi($week, $year);
@@ -63,7 +67,24 @@ class Route extends ChargerView
                 $this->view('footer', $data);
                 break;
 
-            case 'vumois';
+            case 'mois';
+                $vumois = new VuMois;
+                $month = (!empty($url[2]) ? $url[2] : date('m', strtotime(date('Y-m-d'))));
+                $year = (!empty($url[3]) ? $url[3] : date('Y', strtotime(date('Y-m-d'))));
+                $data['month'] = $month;
+                $data['year'] = $year;
+                $vumois->setMonth($month);
+                $vumois->setYear($year);
+                $vumois->setIdclient(1);
+                $data['tabsemaine'] = (new ConvertDate)->getSemaines($year, $month);
+                $data['TypeEve'] = (new TypeEvenement)->getEvenement();
+                $data['tabMois'] = (new ConvertDate)->getTabMoisLettre();
+                $data['tab_jours'] = (new ConvertDate)->getTabjourlettre();
+
+                $data['dateRdv'] = $vumois->index();
+                $this->view('header', $data);
+                $this->view('mois', $data);
+                $this->view('footer', $data);
 
                 break;
 
@@ -74,6 +95,8 @@ class Route extends ChargerView
                 $vujour->setDay($day);
                 $vujour->setMonth($month);
                 $vujour->setYear($year);
+                $vujour->setIdclient(1);
+
                 $data['day'] = $day;
                 $data['month'] = $month;
                 $data['year'] = $year;
@@ -81,6 +104,7 @@ class Route extends ChargerView
                 $data['TypeEve'] = (new TypeEvenement)->getEvenement();
                 $data['jourLettre'] = (new ConvertDate)->getJourLettre(strftime("%u", strtotime(date($year . '-' . $month . '-' . $day))));
                 $data['tabMois'] = (new ConvertDate)->getMoisLettre($month);
+
                 $this->view('header', $data);
                 $this->view('jour', $data);
                 $this->view('footer', $data);

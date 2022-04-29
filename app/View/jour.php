@@ -8,21 +8,21 @@
                 </label>
                 <label class="btn btn-dark ">
                     <a class="nav-link text-light fw-bold"
-                       href="/vusemaine/<?= date('W', strtotime($year . '-' . $month . '-' . $day)); ?>/<?= $year; ?>">Semaine</a>
+                       href="/semaine/<?= date('W', strtotime($year . '-' . $month . '-' . $day)); ?>/<?= $year; ?>">Semaine</a>
                 </label>
                 <label class="btn btn-dark">
                     <a class="nav-link text-light fw-bold"
-                       href="vumois.php?mois=<?= (int)$month; ?>&annee=<?= $year; ?>">Mois</a>
+                       href="/mois/<?= (int)$month; ?>/<?= $year; ?>">Mois</a>
                 </label>
 
             </div>
         </div>
         <div class="col-md-12 border text-center  p-4"><a class="btn btn-dark fw-bold"
-                                                          href="/vujour/<?= (int)$day; ?>/<?= (int)$month; ?>/<?= $year - 1; ?>"><</a>&nbsp;<div
+                                                          href="/jour/<?= (int)$day; ?>/<?= (int)$month; ?>/<?= $year - 1; ?>"><</a>&nbsp;<div
                 class="btn btn-light w-25 fw-bold"><?php echo $year; ?></div>
             &nbsp;&nbsp;
             <a class="btn btn-dark fw-bold"
-               href="/vujour/<?= (int)$day; ?>/<?= (int)$month; ?>/<?php echo $year + 1; ?>">></a>
+               href="/jour/<?= (int)$day; ?>/<?= (int)$month; ?>/<?php echo $year + 1; ?>">></a>
         </div>
         <div class="col-md-12 border text-center  p-4">
 
@@ -45,12 +45,12 @@
         <div class="col-md-10 border  p-4" style="height: 80px;">
             <div class="text-center p-10">
                 <a class="btn btn-dark fw-bold"
-                   href="/vujour/<?= (int)date('d', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('m', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>"><</a>
+                   href="/jour/<?= (int)date('d', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('m', strtotime("-1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>"><</a>
 
                 <div class="btn btn-light w-25 fw-bold"> <?= $jourLettre; ?> <?= date('d', strtotime(date($year . '-' . $month . '-' . $day))); ?>
                     <?= $tabMois; ?> <?= $year; ?></div>
                <a class="btn btn-dark fw-bold"
-                               href="/vujour/<?= (int)date('d', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('m', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>">></a>
+                               href="/jour/<?= (int)date('d', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>/<?= (int)date('m', strtotime("+1 day", strtotime(date($year . '-' . $month . '-' . $day)))); ?>">></a>
             </div>
         </div>
 
