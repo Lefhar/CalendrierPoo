@@ -21,7 +21,7 @@ class getRdv extends personnaliser
     public $day;
     public $hour;
     public $week;
-    public  $idclient;
+    public $idclient;
 
 
     public function setIdclient($idclient)
@@ -126,6 +126,9 @@ class getRdv extends personnaliser
         return $dateRdv;
     }
 
+    /**
+     * @return array
+     */
     public function getMois(): array
     {
         $dateJour = date('Y-m-d', strtotime($this->getYear() . '-' . $this->getMonth() . '-01'));
