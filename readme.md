@@ -1,6 +1,6 @@
 Agenda en poo avec gestion du planning par jour semaines mois
 
-pour installer composer create-project -s dev harold/agenda
+pour installer git clone https://github.com/Lefhar/CalendrierPoo.git
 
 ensuite recupérez le fichier planningv2.sql pour la base de donnée
 
