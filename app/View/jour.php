@@ -61,7 +61,7 @@
             ?>
             <div class="col-md-2 border text-center fw-bold p-4"
                  style="height: 74px;"> <?= ($heure < 10) ? '0' . $heure : $heure; ?>H<br>
-                <a href="nouveau_rdv.php?m=<?= (int)date('m', strtotime(date($year . '-' . $month . '-' . $day))); ?>&y=<?= (int)date('Y', strtotime(date($year . '-' . $month . '-' . $day))); ?>&d=<?= (int)date('d', strtotime(date($year . '-' . $month . '-' . $day))); ?>&h=<?= $heure; ?>">+
+                <a href="/nouveaurdv/<?= (int)date('m', strtotime(date($year . '-' . $month . '-' . $day))); ?>/<?= (int)date('Y', strtotime(date($year . '-' . $month . '-' . $day))); ?>/<?= (int)date('d', strtotime(date($year . '-' . $month . '-' . $day))); ?>/<?= $heure; ?>">+
                     Evénement</a>
             </div>
             <div class="col-md-10 border p-0" style="height: 74px;">
@@ -101,8 +101,8 @@
                                     à <?= $heurefin; ?>  <?= (strlen($rowrdv['Objet_Evenement']) > 10) ? mb_substr($rowrdv['Objet_Evenement'], 0, 10, 'UTF-8') . '...' : $rowrdv['Objet_Evenement']; ?>  <?= (strlen($rowrdv['Contenu_Evenement']) > 10) ? mb_substr($rowrdv['Contenu_Evenement'], 0, 10, 'UTF-8') . '...' : $rowrdv['Contenu_Evenement']; ?>
                                     <a target="_blank" class="Linkrdv bg-link"
                                        style="<?= $rowrdv['Couleur_TypeEvenement']; ?>;"
-                                       href="voirevenement.php?y=<?= (int)$year; ?>&m=<?= (int)$month; ?>&d=<?= (int)$day; ?>">Voir
-                                        la journée</a><?= $marginLeft; ?> <?= $NbrEve; ?>
+                                       href="/voirevenement/<?= (int)$year; ?>/<?= (int)$month; ?>/<?= (int)$day; ?>">Voir
+                                        la journée</a>
                                 </div>
                                 <?php
                                 $NbrEve++;
@@ -115,7 +115,7 @@
                                          style="background-color: #999999;z-index: 2; height: 100px;left: 79%;">
                                         Trop d'événement <a target="_blank" class="Linkrdv bg-link"
                                                             style="<?= $rowrdv['Couleur_TypeEvenement']; ?>;"
-                                                            href="voirevenement.php?y=<?= (int)date('Y', strtotime($year)); ?>&m=<?= (int)date('m', strtotime($month)); ?>&d=<?= (int)date('d', strtotime($day)); ?>">Voir
+                                                            href="/voirevenement/<?= (int)date('Y', strtotime($year)); ?>/<?= (int)date('m', strtotime($month)); ?>/<?= (int)date('d', strtotime($day)); ?>">Voir
                                             la journée</a>
                                     </div>
                                     <?php

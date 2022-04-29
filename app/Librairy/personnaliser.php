@@ -18,4 +18,9 @@ class personnaliser
         }
         return '--rouge: ' . $r . '; --vert: ' . $g . '; --bleu: ' . $b . ';';
     }
+
+    public function redirect($url)
+    {
+        header('Location: '.$url);
+    }
 }
