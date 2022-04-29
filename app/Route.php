@@ -98,7 +98,13 @@ class Route extends chargerView
             case 'mois';
                 $vumois = new moisController;
                 $month = (!empty($url[2] && $url[2] >= 1 && $url[2] <= 12) ? $url[2] : (int)date('m', strtotime(date('Y-m-d'))));
-                $year = (!empty($url[3]) ? $url[3] : (int)date('Y', strtotime(date('Y-m-d'))));
+                if (!empty($url[3])) {
+
+                    $year = (ctype_digit($url[3]) && strlen($url[3]) >= 3) ? $url[3] : (int)date('Y', strtotime(date('Y-m-d')));
+
+                } else {
+                    $year = (int)date('Y', strtotime(date('Y-m-d')));
+                }
                 $data['month'] = $month;
                 $data['year'] = $year;
                 $vumois->setMonth($month);
