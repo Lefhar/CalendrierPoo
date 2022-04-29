@@ -89,7 +89,9 @@ class nouveauRdv extends personnaliser
 
     }
 
-
+    /**
+     * @return false|string|void
+     */
     public function getFormrdv()
     {
 

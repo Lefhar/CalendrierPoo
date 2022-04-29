@@ -6,7 +6,10 @@ use Model\listeEvenement;
 
 class listeevenementController extends listeEvenement
 {
-    public function index()
+    /**
+     * @return array
+     */
+    public function index(): array
     {
         return $this->getEvenement();
     }

@@ -4,6 +4,10 @@ namespace Librairy;
 
 class personnaliser
 {
+    /**
+     * @param $hex
+     * @return string
+     */
     public function hex2rgb($hex): string
     {
         $hex = str_replace("#", "", $hex);
@@ -19,6 +23,10 @@ class personnaliser
         return '--rouge: ' . $r . '; --vert: ' . $g . '; --bleu: ' . $b . ';';
     }
 
+    /**
+     * @param $url
+     * @return void
+     */
     public function redirect($url)
     {
         header('Location: '.$url);

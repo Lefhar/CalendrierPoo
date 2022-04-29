@@ -16,9 +16,9 @@ class getRdv extends personnaliser
     }
 
 
-    public $year;
-    public $month;
-    public $day;
+    public int $year;
+    public int $month;
+    public int $day;
     public $hour;
     public $week;
     public $idclient;
@@ -54,25 +54,25 @@ class getRdv extends personnaliser
         $this->hour = $hour;
     }
 
-    public function getYear()
+    public function getYear():int
     {
         return $this->year;
 
     }
 
-    public function getMonth()
+    public function getMonth():int
     {
         return $this->month;
 
     }
 
-    public function getDay()
+    public function getDay():int
     {
         return $this->day;
 
     }
 
-    public function getWeek()
+    public function getWeek():int
     {
         return $this->week;
 

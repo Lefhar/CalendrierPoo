@@ -17,6 +17,9 @@ class typeEvenement
         return $this->idclient;
     }
 
+    /***
+     * @return array|false
+     */
     public function getEvenement()
     {
 

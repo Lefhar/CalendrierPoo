@@ -3,6 +3,7 @@
 namespace Model;
 
 use PDO;
+use PDOException;
 
 class Database
 {
@@ -12,6 +13,9 @@ class Database
     static $password = "";
     static $db = null;
 
+    /**
+     * @return PDO|void|null
+     */
     static function connect()
     {
         try {

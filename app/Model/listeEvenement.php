@@ -62,6 +62,9 @@ class listeEvenement extends personnaliser
 
     }
 
+    /**
+     * @return array
+     */
     public function getEvenement(): array
     {
         $dateActuel = date('Y-m-d', strtotime($this->getYear() . '-' . $this->getMonth() . '-' . $this->getDay()));

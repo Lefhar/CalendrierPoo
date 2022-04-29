@@ -6,7 +6,10 @@ use Model\nouveauTypeevenement;
 
 class nouveautypeevenementController extends nouveauTypeevenement
 {
-    public function index()
+    /**
+     * @return bool
+     */
+    public function index(): bool
     {
         return $this->getFormtypeeve();
     }

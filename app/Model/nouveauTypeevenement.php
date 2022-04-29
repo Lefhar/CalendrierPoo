@@ -38,6 +38,9 @@ class nouveauTypeevenement extends personnaliser
 
     }
 
+    /**
+     * @return bool
+     */
     public function getFormtypeeve(): bool
     {
         if (!empty($this->getPost())) {
