@@ -6,8 +6,6 @@ class ConvertDate
 {
 
     /**
-     * @param $year
-     * @param $month
      * @param $day
      * @return string
      */
@@ -116,10 +114,14 @@ class ConvertDate
         else
             $shift = (8 - $firstDayInYear) * 86400;
         if ($week > 1) $weekInSeconds = ($week - 1) * 604800; else $weekInSeconds = 0;
-        $timestamp = mktime(0, 0, 0, 1, 1, $year) + $weekInSeconds + $shift;
-        return $timestamp;
+        return mktime(0, 0, 0, 1, 1, $year) + $weekInSeconds + $shift;
     }
 
+    /**
+     * @param $year
+     * @param $month
+     * @return array
+     */
     public function getSemaines($year,$month): array
     {
 

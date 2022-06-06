@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 21 avr. 2022 à 14:45
--- Version du serveur : 10.4.22-MariaDB
+-- Généré le : lun. 06 juin 2022 à 15:54
+-- Version du serveur : 10.6.5-MariaDB
 -- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `planningv2`
 --
-CREATE DATABASE IF NOT EXISTS `planningv2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `planningv2`;
 
 -- --------------------------------------------------------
 
@@ -32,9 +30,10 @@ USE `planningv2`;
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client`
 (
-    `Id_Client` int(11) NOT NULL AUTO_INCREMENT,
+    `Id_Client`  int(11) NOT NULL AUTO_INCREMENT,
+    `Nom_Client` varchar(50) DEFAULT NULL,
     PRIMARY KEY (`Id_Client`)
-) ENGINE = MyISAM
+) ENGINE = InnoDB
   AUTO_INCREMENT = 5
   DEFAULT CHARSET = latin1;
 
@@ -42,11 +41,11 @@ CREATE TABLE IF NOT EXISTS `client`
 -- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`Id_Client`)
-VALUES (1),
-       (2),
-       (3),
-       (4);
+INSERT INTO `client` (`Id_Client`, `Nom_Client`)
+VALUES (1, 'Carine'),
+       (2, 'Jean'),
+       (3, 'Leon'),
+       (4, 'Alice');
 
 -- --------------------------------------------------------
 
@@ -66,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `evenement`
     `Id_TypeEvenement`    int(11)     DEFAULT NULL,
     PRIMARY KEY (`Id_Evenement`),
     KEY `Id_TypeEvenement` (`Id_TypeEvenement`)
-) ENGINE = MyISAM
+) ENGINE = InnoDB
   AUTO_INCREMENT = 7
   DEFAULT CHARSET = latin1;
 
@@ -96,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `typeevenement`
     `Id_Client`             int(11)     DEFAULT NULL,
     PRIMARY KEY (`Id_TypeEvenement`),
     KEY `Id_Client` (`Id_Client`)
-) ENGINE = MyISAM
-  AUTO_INCREMENT = 9
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 7
   DEFAULT CHARSET = latin1;
 
 --
@@ -111,6 +110,22 @@ VALUES (1, 'Rdv', '#cf2a2a', 1),
        (4, 'congé', '#cbe411', 1),
        (5, 'Livraison', '#ec8d09', 1),
        (6, 'Commande', '#2115c1', 1);
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `evenement`
+--
+ALTER TABLE `evenement`
+    ADD CONSTRAINT `evenement_ibfk_1` FOREIGN KEY (`Id_TypeEvenement`) REFERENCES `typeevenement` (`Id_TypeEvenement`);
+
+--
+-- Contraintes pour la table `typeevenement`
+--
+ALTER TABLE `typeevenement`
+    ADD CONSTRAINT `typeevenement_ibfk_1` FOREIGN KEY (`Id_Client`) REFERENCES `client` (`Id_Client`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
