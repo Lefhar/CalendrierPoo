@@ -102,6 +102,7 @@ class ConvertDate
     }
 
     /**
+     * Récupération du timetamp de l'année
      * @param $year
      * @param $week
      * @return float|int
@@ -118,6 +119,7 @@ class ConvertDate
     }
 
     /**
+     * Fonction qui retourne les semaines avec l'année et le mois
      * @param $year
      * @param $month
      * @return array
@@ -128,7 +130,6 @@ class ConvertDate
         $tabsemaine = array();
         $dateJour = date('Y-m-d', strtotime($year . '-' . $month . '-01'));
 
-
         $demare = date('Y-m-d', strtotime('last monday', strtotime($dateJour)));
 
 
@@ -136,7 +137,6 @@ class ConvertDate
 
 
             for ($jour = 0; $jour < 7; $jour++) {
-
 
                 $tabsemaine[$ligne][(int)date('W', strtotime($demare))][] = $demare;
                 $demare = date("Y-m-d", strtotime($demare . '+ 1 days'));
