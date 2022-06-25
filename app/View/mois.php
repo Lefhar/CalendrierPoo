@@ -23,9 +23,8 @@
 
             <a class="btn btn-dark fw-bold" href="/mois/<?= $month; ?>/<?php echo $year + 1; ?>">></a>
         </div>
-        <div class="col-md-12 border text-center  p-4"><a class="btn btn-dark fw-bold"
-                                                          href="/mois/<?= ($month - 1 == 0) ? 12 : $month - 1; ?>
-/<?= ($month - 1 == 0) ? $year - 1 : $year; ?>"><</a>
+        <div class="col-md-12 border text-center  p-4">
+            <a class="btn btn-dark fw-bold" href="/mois/<?= ($month - 1 == 0) ? 12 : $month - 1; ?>/<?= ($month - 1 == 0) ? $year - 1 : $year; ?>"><</a>
             <div class="btn btn-light w-25 fw-bold"><?=$tabMois[$month]; ?></div>
             <a class="btn btn-dark fw-bold"
                            href="/mois/<?= ($month + 1 >= 12) ? 1 : $month + 1; ?>/<?= ($month + 1 >= 12) ? $year + 1 : $year; ?>">></a>

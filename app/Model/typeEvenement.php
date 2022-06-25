@@ -17,10 +17,11 @@ class typeEvenement
         return $this->idclient;
     }
 
-    /***
+    /**
+     * Charge la liste des types d'événement en fonction de l'id du client
      * @return array|false
      */
-    public function getEvenement()
+    public function getTypeEvenement()
     {
 
         $db = Database::connect();

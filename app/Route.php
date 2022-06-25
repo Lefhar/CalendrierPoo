@@ -52,7 +52,7 @@ class Route extends chargerView
                 $data['dateRdv'] = $vujour->index();
                 $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
-                $data['TypeEve'] = $typeEvenement->getEvenement();
+                $data['TypeEve'] = $typeEvenement->getTypeEvenement();
                 $data['jourLettre'] = (new ConvertDate)->getJourLettre(strftime("%u", strtotime(date($year . '-' . $month . '-' . $day))));
                 $data['tabMois'] = (new ConvertDate)->getMoisLettre($month);
                 $data['title']= 'Calendrier du jour';
@@ -88,7 +88,7 @@ class Route extends chargerView
                 $data['tabjourLettre'] = (new ConvertDate)->getTabjourlettre();
                 $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
-                $data['TypeEve'] = $typeEvenement->getEvenement();
+                $data['TypeEve'] = $typeEvenement->getTypeEvenement();
                 $data['year'] = $year;
                 $data['week'] = $week;
                 $this->view('header', $data);
@@ -113,7 +113,7 @@ class Route extends chargerView
                 $data['tabsemaine'] = (new ConvertDate)->getSemaines($year, $month);
                 $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
-                $data['TypeEve'] = $typeEvenement->getEvenement();
+                $data['TypeEve'] = $typeEvenement->getTypeEvenement();
 
                 $data['tabMois'] = (new ConvertDate)->getTabMoisLettre();
                 $data['tab_jours'] = (new ConvertDate)->getTabjourlettre();
@@ -147,7 +147,7 @@ class Route extends chargerView
                 $nouveaurdv->setIdclient(1);
                 $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
-                $data['TypeEve'] = $typeEvenement->getEvenement();
+                $data['TypeEve'] = $typeEvenement->getTypeEvenement();
                 $data['title']= 'Nouveau Rendez-vous';
 
                 $data['dateActuel'] = $nouveaurdv->getFormrdv();
@@ -196,7 +196,7 @@ class Route extends chargerView
                 $listeEvenement->setDay($day);
                 $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
-                $data['TypeEve'] = $typeEvenement->getEvenement();
+                $data['TypeEve'] = $typeEvenement->getTypeEvenement();
                 $data['dateRdv'] = $listeEvenement->index();
                 $this->view('header', $data);
                 $this->view('listeevenement', $data);
@@ -227,7 +227,7 @@ class Route extends chargerView
                 $data['month'] = $month;
                 $data['year'] = $year;
                 $data['dateRdv'] = $vujour->index();
-                $data['TypeEve'] = (new typeEvenement)->getEvenement();
+                $data['TypeEve'] = (new typeEvenement)->getTypeEvenement();
                 $data['jourLettre'] = (new ConvertDate)->getJourLettre(strftime("%u", strtotime(date($year . '-' . $month . '-' . $day))));
                 $data['tabMois'] = (new ConvertDate)->getMoisLettre($month);
 

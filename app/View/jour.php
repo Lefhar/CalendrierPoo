@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-
+<!-- bouton jour, semaine, mois-->
         <div class="col-md-12 border text-center p-4">
             <div class="btn-group btn-group-toggle">
                 <label class="btn btn-info active">
@@ -17,6 +17,9 @@
 
             </div>
         </div>
+        <!-- fin bouton jour, semaine, mois-->
+
+        <!--début navigation sûr l'année-->
         <div class="col-md-12 border text-center  p-4"><a class="btn btn-dark fw-bold"
                                                           href="/jour/<?= (int)$day; ?>/<?= (int)$month; ?>/<?= $year - 1; ?>"><</a>&nbsp;<div
                 class="btn btn-light w-25 fw-bold"><?php echo $year; ?></div>
@@ -24,6 +27,9 @@
             <a class="btn btn-dark fw-bold"
                href="/jour/<?= (int)$day; ?>/<?= (int)$month; ?>/<?php echo $year + 1; ?>">></a>
         </div>
+        <!--fin navigation sur l'année-->
+
+        <!--début case à cocher sur les types d'événement-->
         <div class="col-md-12 border text-center  p-4">
 
             <?php foreach ($TypeEve as $key => $rowcheck) { ?>
@@ -39,7 +45,7 @@
 
             ?>
         </div>
-
+        <!--fin case à cocher sur les types d'événement-->
 
         <div class="col-md-2 border text-center fw-bold  p-4" style="height: 80px;">Heures</div>
         <div class="col-md-10 border  p-4" style="height: 80px;">
@@ -85,7 +91,8 @@
 
                     <?php
 
-                    if (date('Y-m-d', strtotime($rowrdv['Datedebut_Evenement'])) <= $dateactuel->format('Y-m-d') and date('Y-m-d', strtotime($rowrdv['Datefin_Evenement'])) >= $dateactuel->format('Y-m-d')) {
+                    if (date('Y-m-d', strtotime($rowrdv['Datedebut_Evenement'])) <= $dateactuel->format('Y-m-d') and
+                        date('Y-m-d', strtotime($rowrdv['Datefin_Evenement'])) >= $dateactuel->format('Y-m-d')) {
                         if ($heuredebut >= $heuredebutTeste and $heuredebut <= $heurefinTeste) {
 
                             ?>
