@@ -119,12 +119,12 @@ class ConvertDate
     }
 
     /**
-     * Fonction qui retourne les semaines avec l'année et le mois
+     * Fonction qui retourne un tableau avec le numéro de la semaine et les jours de la semaine avec l'année et le mois
      * @param $year
      * @param $month
      * @return array
      */
-    public function getSemaines($year,$month): array
+    public function getTabMonth($year,$month): array
     {
 
         $tabsemaine = array();

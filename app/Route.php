@@ -110,7 +110,7 @@ class Route extends chargerView
                 $vumois->setMonth($month);
                 $vumois->setYear($year);
                 $vumois->setIdclient(1);
-                $data['tabsemaine'] = (new ConvertDate)->getSemaines($year, $month);
+                $data['tabsemaine'] = (new ConvertDate)->getTabMonth($year, $month);
                 $typeEvenement = new typeEvenement();
                 $typeEvenement->setIdclient(1);
                 $data['TypeEve'] = $typeEvenement->getTypeEvenement();
