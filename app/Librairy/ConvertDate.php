@@ -85,6 +85,7 @@ class ConvertDate
     }
 
     /**
+     * On incrémente d'un jour avec le for à partir du premier lundi de la semaine
      * @param $week
      * @param $year
      * @return array
@@ -102,14 +103,16 @@ class ConvertDate
     }
 
     /**
-     * Récupération du timetamp de l'année
+     * Permet de récupérer la date du premier lundi de la semaine en donnant le numéro de la semaine avec l'année
      * @param $year
      * @param $week
      * @return float|int
      */
     public function getTimetamp($year, $week)
     {
+        //premier jour de l'année
         $firstDayInYear = date("N", mktime(0, 0, 0, 1, 1, $year));
+        //si le premier jour de l'année est inférieur au 5
         if ($firstDayInYear < 5)
             $shift = -($firstDayInYear - 1) * 86400;
         else
